@@ -45,6 +45,20 @@
   ) 
 
 
+;Punto 11
+
+(define zip
+  (lambda (f l1 l2)
+
+      (if (and (eqv? l1 empty)(eqv? l2 empty))
+          '()
+          (cons (f (car l1) (car l2)) (zip f (cdr l1) (cdr l2)))
+          
+          )
+      
+    )
+  )
+
 ;Punto 12
 
 
