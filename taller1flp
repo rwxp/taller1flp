@@ -19,6 +19,25 @@
         (cons (cons(car l) empty) (down (cdr l))))
         ))
 
+;punto 6
+
+(define swapper
+  (lambda (e1 e2 l)
+
+      (if (eqv? l empty) '()
+          (if(eqv? (car l) e1)
+             (cons e2 (swapper e1 e2 (cdr l)))
+             (if (eqv? (car l) e2)
+                 (cons e1 (swapper e1 e2 (cdr l)))
+                 (cons (car l) (swapper e1 e2 (cdr l)))
+                 )
+             )
+          )
+      
+    )
+  )
+
+
 ;Punto 7
 
 (define cartesian-product
