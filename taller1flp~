@@ -4,15 +4,6 @@
 
 ;; Ejercicios - IL 1.1.1
 
-;Punto 1
-( define invert
-   (lambda (l)
-     (if (null? l)
-         '()
-     (cons (cons (cadar l) (cons (caar l) empty)) (invert (cdr l)) ))
-   )
- )
-
 ;Punto 2
 (define down (lambda(l)
         (if (eqv? l empty ) empty
