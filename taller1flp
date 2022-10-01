@@ -5,6 +5,15 @@
 ;; Ejercicios - IL 1.1.1
 
 ;Punto 1
+
+;; invert :recibe como entrada tres parámetros: una función binaria F, y dos listas L1 y L2, ambas de igual tamaño.
+;; Proposito: retornar una lista donde la posición n-ésima es el resultado de aplicar F sobre los elementos de L1 yL2 en esa
+;; posición.
+;; 
+;;
+;;<lista> := ()
+;;  := (<valor-de-scheme> <lista>)
+
 ( define invert
    (lambda (l)
      (if (null? l)
@@ -13,6 +22,13 @@
    )
  )
 
+;;Pruebas
+
+(invert '(("estás" "cómo?")(a 1) (a 2) (1 b) (2 b)))
+(invert '((50 93) (1 41) (82 7) (a e) ("hola" "Mundo")))
+(invert '(("que" "creo") ("es" "racket") ("genial" "muy") (17 29) (81 o)))
+
+
 ;Punto 2
 (define down (lambda(l)
         (if (eqv? l empty ) empty
@@ -20,6 +36,14 @@
         ))
 
 ;punto 6
+
+;; swapper :recibe como entrada tres parámetros: una función binaria F, y dos listas L1 y L2, ambas de igual tamaño.
+;; Proposito: retornar una lista donde la posición n-ésima es el resultado de aplicar F sobre los elementos de L1 yL2 en esa
+;; posición.
+;; 
+;;
+;;<lista> := ()
+;;  := (<valor-de-scheme> <lista>)
 
 (define swapper
   (lambda (e1 e2 l)
@@ -37,6 +61,11 @@
     )
   )
 
+;;Pruebas
+(swapper 'c 'a '(d b c a))
+(swapper 'w 'v '(d v c w n m c w o p v))
+(swapper 'x 'l '(l b c x c l q x x n l))
+(swapper 'd 'b '(d b c a a b b b d d d d d))
 
 ;Punto 7
 
@@ -46,6 +75,14 @@
 
 
 ;Punto 11
+
+;; zip :recibe como entrada tres parámetros: una función binaria F, y dos listas L1 y L2, ambas de igual tamaño.
+;; Proposito: retornar una lista donde la posición n-ésima es el resultado de aplicar F sobre los elementos de L1 yL2 en esa
+;; posición.
+;; 
+;;
+;;<lista> := ()
+;;  := (<valor-de-scheme> <lista>)
 
 (define zip
   (lambda (f l1 l2)
@@ -58,6 +95,12 @@
       
     )
   )
+
+;;Pruebas
+(zip + '(1 4 7 9) '(6 2 6 0))
+(zip * '(11 5 6) '(10 9 8))
+(zip - '(20 45 65 6) '(10 40 18 5))
+
 
 ;Punto 12
 
