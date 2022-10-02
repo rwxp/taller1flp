@@ -69,28 +69,10 @@
 
 ;Punto 7
 
-;Punto 7
-; (1 2 3) (a b) -> ((1 a) (1 b) (2 a) (2 b) (3 a) (3 b))
-
 (define cartesian-product
-  (lambda(l1 l2)
   (letrec
-      (
-       (pivotfunction
-        (lambda (l1)
-          (if (eqv? l1 empty) empty
-              (append (cartesianfunction (car l1) l2) (pivotfunction (cdr l1)))
-        )))
-       (cartesianfunction
-        (lambda (pivot l)
-          (if (eqv? l empty) empty
-              (cons (cons pivot (cons (car l) empty)) (cartesianfunction pivot (cdr l)))
-       )))
-       )
-    (pivotfunction l1)
-      )
-    )
-  )
+  ) 
+
 
 ;Punto 11
 
@@ -121,46 +103,10 @@
 
 
 ;Punto 12
-(define filter-acum
-  (lambda(a b F acum filter)
-    (letrec
-        (
-         (list-filter
-          (lambda (a b filter)
-            (if (> a b) empty
-                (if (filter a) (cons a (list-filter (+ a 1) b filter)) (list-filter (+ a 1) b filter))  
-          )))
-         (op-applier
-          (lambda (F l)
-            (if (eqv? l empty) acum
-                (F (car l) (op-applier F (cdr l)))
-             )
-            )
-         ))
-      (op-applier F (list-filter a b filter))
-        )
-    )
-  )
 
 
 ;Punto 17
 
-(define prod-scalar-matrix
-  (lambda (mat vec)
-    (letrec
-        (
-         (row-iterator
-          (lambda(mat vec)
-            (if (eqv? mat empty) empty
-                (cons (multiplier (car mat) vec) (row-iterator (cdr mat) vec))
-                )
-            ))
-         (multiplier
-          (lambda (l1 vec)
-            (if (eqv? l1 empty) empty
-            (cons (* (car l1 ) (car vec)) (multiplier (cdr l1) (cdr vec)))
-            )
-            ))
-         )
-      (row-iterator mat vec)
-    )))
+
+
+;Punto 22 
