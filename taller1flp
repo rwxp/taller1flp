@@ -30,10 +30,22 @@
 
 
 ;Punto 2
+;; down:
+;; Proposito:
+;; L ->  L: Procedimiento que recibe una lista en cuyo interior hay n elementos y
+;; a cada elemento le agrega un nivel mas (lo introduce en una lista).
+;; <Lista> := ()
+;;         := (<valor-de-scheme> <lista>)
 (define down (lambda(l)
         (if (eqv? l empty ) empty
         (cons (cons(car l) empty) (down (cdr l))))
         ))
+
+;; Pruebas:
+
+(down '(1 2 3)) ; ---> '((1) (2) (3))
+(down '((una) (buena) (idea))) ; ---> '(((una)) ((buena)) ((idea)))
+(down '(un (objeto (mas)) complicado)) ;---> '((un) ((objeto (mas))) (complicado))
 
 ;punto 6
 
@@ -67,10 +79,15 @@
 (swapper 'x 'l '(l b c x c l q x x n l))
 (swapper 'd 'b '(d b c a a b b b d d d d d))
 
-;Punto 7
 
-;Punto 7
-; (1 2 3) (a b) -> ((1 a) (1 b) (2 a) (2 b) (3 a) (3 b))
+; Punto 7
+;; cartesian-product:
+;; Proposito:
+;; L , L -> L: Procedimiento que recibe dos listas y realiza el producto cartesiano
+;; entre aquellas dos listas recibidas. Este producto es retornado en forma de
+;; lista que contiene todas las duplas.
+;; <Lista> := ()
+;;         := (<valor-de-scheme> <lista>)
 
 (define cartesian-product
   (lambda(l1 l2)
@@ -91,6 +108,13 @@
       )
     )
   )
+
+;; Pruebas
+(cartesian-product '(a b c) '(x y)) ; ---> '((a x) (a y) (b x) (b y) (c x) (c y))
+(cartesian-product '(p q r) '(5 6 7))
+; --> '((p 5) (p 6) (p 7) (q 5) (q 6) (q 7) (r 5) (r 6) (r 7))
+
+
 
 ;Punto 11
 
@@ -143,8 +167,21 @@
   )
 
 
-;Punto 17
-
+; Punto 17
+;; prod-escalar-matrix:
+;; Proposito:
+;; mat'(L1, L2.. Ln), vec(L) -> L: Recibe dos entradas, la primera
+;; entrada corresponde a una matriz la cual es representada por medio de
+;; una lista de listas.
+;; La segunda entrada consiste en un vector el cual es representado por medio de
+;; una lista.
+;; El procedimiento se encarga de realizar la multiplicacion de una matriz por un vector
+;; y retornar el resultado en forma de lista.
+;; <Vector> := ()
+;;         := (<entero> <vector>)
+;; <Matriz>:= '()
+;;         := (<vector> <Matriz>)
+;; 
 (define prod-scalar-matrix
   (lambda (mat vec)
     (letrec
@@ -164,3 +201,8 @@
          )
       (row-iterator mat vec)
     )))
+
+;; Pruebas:
+(prod-scalar-matrix '((1 1) (2 2)) '(2 3)) ; --> '((2 3) (4 6))
+(prod-scalar-matrix '((1 1) (2 2) (3 3)) '(2 3)) ; --> '((2 3) (4 6) (6 9))
+
