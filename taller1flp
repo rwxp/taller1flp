@@ -144,6 +144,16 @@
 (zip - '(20 45 65 6) '(10 40 18 5))
 
 
+;; Punto 12
+;; filter-acum:
+;; Proposito:
+;; a, b, F, acum, filter -> int: Recibe 5 entradas, las dos primeras corresponden a los valores
+;; que  determinan el inicio y el final del intervalo [a, b]. La entrada F
+;; corresponde a aquella funcion que se va a aplicar a todos los elementos pertenecientes
+;; al intervalo [a, b] que cumplan la condicion que establece la funcion filter.
+;;   <lista-enteros> := ()
+;;                   := (<int> <lista>)
+
 ;Punto 12
 (define filter-acum
   (lambda(a b F acum filter)
@@ -165,6 +175,8 @@
         )
     )
   )
+
+
 
 
 ; Punto 17
