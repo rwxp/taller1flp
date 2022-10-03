@@ -155,13 +155,13 @@
                 (if (filter a) (cons a (list-filter (+ a 1) b filter)) (list-filter (+ a 1) b filter))  
           )))
          (op-applier
-          (lambda (F l)
-            (if (eqv? l empty) acum
-                (F (car l) (op-applier F (cdr l)))
+          (lambda (F acum l)
+            (if (eqv? l  empty) acum
+                (op-applier F (F acum (car l)) (cdr l))
              )
             )
          ))
-      (op-applier F (list-filter a b filter))
+      (op-applier F acum (list-filter a b filter))
         )
     )
   )
