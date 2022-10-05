@@ -55,6 +55,7 @@
 ;; iniciando desde la posición 'n'.
 ;; <lista> ::= ()
 ;;         ::= (<int><lista>)
+
 (define list-index-aux
   (lambda (n pred lst)
     (if (null? lst) 
@@ -69,9 +70,11 @@
 
 ;; list-index :
 ;; Propósito:
-;; int x L -> int' : Funciona haciendo un llamado a la función <list-index-aux>, estableciendo un valor inicial en el valor 'n' de dicha función.
+;; int x L -> int' : Funciona haciendo un llamado a la función <list-index-aux>, estableciendo un valor inicial en el valor
+;; 'n' de dicha función.
 ;; <lista> ::= ()
 ;;         ::= (<int><lista>)
+
 (define list-index
   (lambda (pred lst)
     (list-index-aux 0 pred lst)
