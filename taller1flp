@@ -1,14 +1,17 @@
 #lang eopl
 
-
-
-;; Ejercicios - IL 1.1.1
+;;Sebastián Caicedo Martínez - 1841245
+;;Laura Moyano Gonzalez - 2023906
+;;Santiago Trujillo Ramírez - 2071655
+;;Cristian Camilo Montaño Rentería - 2024223
+;;Santiago ospitia jimenez - 2025465
+;; Talle 1 FLP
 
 ;Punto 1
 
-;; invert : parámetros: recibe como entrada una lista l que está compuesta por listas de dos elementos (x, y).
+;; invert : parámetros: recibe una lista l que está compuesta por listas de dos elementos (x, y).
 ;; Proposito:La función debe retornar una lista similar a l, con pares ordenados invertidos, es decir, y, x.
-;; 
+;; L -> l
 ;; <lista> := ()
 ;; <sublista> := (<valor-de-scheme> <valor-de-scheme>)
 ;; <lista> := (<sublista> <lista>)
@@ -22,7 +25,6 @@
  )
 
 ;;Pruebas
-
 (invert '(("estás" "cómo?")(a 1) (a 2) (1 b) (2 b)))
 (invert '((50 93) (1 41) (82 7) (a e) ("hola" "Mundo")))
 (invert '(("que" "creo") ("es" "racket") ("genial" "muy") (17 29) (81 o)))
@@ -42,7 +44,6 @@
         ))
 
 ;; Pruebas:
-
 (down '(1 2 3)) ; ---> '((1) (2) (3))
 (down '((una) (buena) (idea))) ; ---> '(((una)) ((buena)) ((idea)))
 (down '(un (objeto (mas)) complicado)) ;---> '((un) ((objeto (mas))) (complicado))
@@ -70,7 +71,8 @@
 
 ;; list-index :
 ;; Propósito:
-;; int x L -> int' : Funciona haciendo un llamado a la función <list-index-aux>, estableciendo un valor inicial en el valor
+;; int x L -> int' : Funciona haciendo un llamado a la función <list-index-aux>,
+;; estableciendo un valor inicial en el valor
 ;; 'n' de dicha función.
 ;; <lista> ::= ()
 ;;         ::= (<int><lista>)
@@ -112,10 +114,10 @@
   )
 
 ;;Pruebas
-(swapper 'c 'a '(d b c a))
-(swapper 'w 'v '(d v c w n m c w o p v))
-(swapper 'x 'l '(l b c x c l q x x n l))
-(swapper 'd 'b '(d b c a a b b b d d d d d))
+(swapper 'c 'a '(d b c a)) ;-->(d b a c)
+(swapper 'w 'v '(d v c w n m c w o p v)) ;-->(d w c v n m c v o p w)
+(swapper 'x 'l '(l b c x c l q x x n l)) ;-->(x b c l c x q l l n x)
+(swapper 'd 'b '(d b c a a b b b d d d d d)) ;-->(b d c a a d d d b b b b b)
 
 
 ; Punto 7
@@ -134,13 +136,18 @@
        (pivotfunction
         (lambda (l1)
           (if (eqv? l1 empty) empty
-              (append (cartesianfunction (car l1) l2) (pivotfunction (cdr l1)))
+              (appendfunction (cartesianfunction (car l1) l2) (pivotfunction (cdr l1)))
         )))
        (cartesianfunction
         (lambda (pivot l)
           (if (eqv? l empty) empty
               (cons (cons pivot (cons (car l) empty)) (cartesianfunction pivot (cdr l)))
        )))
+       (appendfunction
+         (lambda(l1 l2)
+           (if (eqv? l1 empty) l2
+               (cons (car l1) (appendfunction  (cdr l1) l2))
+               )))
        )
     (pivotfunction l1)
       )
@@ -149,8 +156,7 @@
 
 ;; Pruebas
 (cartesian-product '(a b c) '(x y)) ; ---> '((a x) (a y) (b x) (b y) (c x) (c y))
-(cartesian-product '(p q r) '(5 6 7))
-; --> '((p 5) (p 6) (p 7) (q 5) (q 6) (q 7) (r 5) (r 6) (r 7))
+(cartesian-product '(p q r) '(5 6 7)); --> '((p 5) (p 6) (p 7) (q 5) (q 6) (q 7) (r 5) (r 6) (r 7))
 
 ;Punto 10
 
@@ -215,9 +221,9 @@
   )
 
 ;;Pruebas
-(zip + '(1 4 7 9) '(6 2 6 0))
-(zip * '(11 5 6) '(10 9 8))
-(zip - '(20 45 65 6) '(10 40 18 5))
+(zip + '(1 4 7 9) '(6 2 6 0)) ;-->(7 6 13 9)
+(zip * '(11 5 6) '(10 9 8)) ;-->(110 45 48)
+(zip - '(20 45 65 6) '(10 40 18 5)) ;-->(10 5 47 1)
 
 
 ;; Punto 12
@@ -246,11 +252,23 @@
                 (op-applier F (F acum (car l)) (cdr l))
              )
             )
-         ))
+         )
+         
+         (append-aux (lambda (l1 l2)
+          (cond ((null? l1) l2)
+                ((null? l2 ) l1)
+                (else (cons (car l1) append (cdr l1) l2))
+                )
+
+          ))
+         )
       (op-applier F acum (list-filter a b filter))
         )
     )
   )
+;; Pruebas:
+(filter-acum 1 10 + 0 odd?) ;--> 25 
+(filter-acum 1 10 + 0 even?) ;---> 30 
   
 ;Punto 15
 
@@ -327,7 +345,6 @@
 ;; entero par.
 ;; Proposito: cálcula la integral de una función f entre los valores a y b mediante la regla de Simpson.
 ;; F, int, int, int%2=0 -> int
-;;
 
 (define simpson-rule
   (lambda (f a b n)
@@ -354,6 +371,10 @@
     )
   )
 
+;;Pruebas
+
+(simpson-rule (lambda (x) (* x (* x x))) 1 5 8) ;--->156
+(simpson-rule (lambda (x) x) 1 5 12) ;--->12
 
 ; Punto 17
 ;; prod-escalar-matrix:
@@ -398,16 +419,15 @@
 
 ;Punto 18
 
-;; Pascal:
+;; Pascal: recibe como parametro el número (int) de fila n del triangulo de pascal.
 ;; Proposito: retorna la fila N del triangulo de Pascal.
 ;; int -> L
-;;
-;;
+;; <lista-enteros> := ()
+;;                 := (<int> <lista>)
 
 (define pascal (lambda (n)
                  (letrec (
-                           (init-l (cons 1 empty))
-                          
+                           (init-l (cons 1 empty))                          
                            (next-list (lambda (lst)
                                         ( if (null? (cdr lst)) (cons 1 empty)
                                              (cons(+ (car lst) (cadr lst))
@@ -416,12 +436,22 @@
                            (pascal-row (lambda(init-lst n)
                                           (if (or (= 0 n) (= n 1))
                                               init-lst
-                                              (pascal-row (append
+                                              (pascal-row (append-aux
                                                             (cons 1 empty)
                                                             (next-list init-lst)) (- n 1)))))
-                          )
+                           (append-aux (lambda (l1 l2)
+                                             (cond ((null? l1) l2)
+                                                   ((null? l2 ) l1)
+                                                   (else (cons (car l1)(append(cdr l1) l2)))
+                                                   )
+                                             ))
+                           )
                    (pascal-row init-l n)
                    )
                  )
   )
+;; Pruebas
+(pascal 1) ;---> (1)
+(pascal 6) ;---> (1 5 10 10 5 1)
+(pascal 10) ;---> (1 9 36 84 126 126 84 36 9 1)
 
