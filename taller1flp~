@@ -13,10 +13,9 @@
 ;; Proposito:La función debe retornar una lista similar a l, con pares ordenados invertidos, es decir, y, x.
 ;; L -> l
 ;; <lista> := ()
-;;         := (<pareja> <lista>)
+;; <sublista> := (<valor-de-scheme> <valor-de-scheme>)
+;; <lista> := (<sublista> <lista>)
 
-;; <pareja> := (<valor> <valor>)
-;;        
 ( define invert
    (lambda (l)
      (if (null? l)
