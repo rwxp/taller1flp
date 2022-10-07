@@ -80,7 +80,7 @@
 ;; Propósito:
 ;; int x int x L -> int' : Este procedimiento retorna la posición del primer elemento de la lista que cumpla con el predicado 'pred',
 ;; iniciando desde la posición 'n'.
-;; <lista> ::= ()
+;; <lista> ::= <bool>
 ;;         ::= (<int><lista>)
 
 (define list-index-aux
@@ -100,7 +100,7 @@
 ;; int x L -> int' : Funciona haciendo un llamado a la función <list-index-aux>,
 ;; estableciendo un valor inicial en el valor
 ;; 'n' de dicha función.
-;; <lista> ::= ()
+;; <lista> ::= <bool>
 ;;         ::= (<int><lista>)
 
 (define list-index
@@ -376,7 +376,7 @@
 ;; Propósito:
 ;; bintree -> int' : Recorre un árbol y hace el conteo de la cantidad de números pares presentes.
 ;; En caso de que la lista sea vacía, retorna 0.
-;; <bintree> ::= ()
+;; <bintree> ::= <int>
 ;;           ::= (<int><bintree><bintree>)
 (define count-even
   (lambda (arbol)
@@ -398,7 +398,7 @@
 ;; Propósito:
 ;; bintree -> int' : Recorre un árbol y hace el conteo de la cantidad de números impares presentes.
 ;; En caso de que la lista sea vacía, retorna 0.
-;; <bintree> ::= ()
+;; <bintree> ::= <int>
 ;;           ::= (<int><bintree><bintree>)
 (define count-odd
   (lambda (arbol)
@@ -421,8 +421,7 @@
 ;; Propósito:
 ;; Int x Int -> L' : retorna una lista con dos elementos correspondientes
 ;; a la cantidad de pares e impares en arbol.
-;; <lista> ::= ()
-;;         ::= (<Listof(Int)>)
+;; <lista> ::= (<int><int>)
 (define count-odd-and-even
   (lambda (arbol)
     (cons (count-even arbol) (cons (count-odd arbol) empty))
