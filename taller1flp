@@ -5,7 +5,7 @@
 ;;Santiago Trujillo Ramírez - 2071655
 ;;Cristian Camilo Montaño Rentería - 2024223
 ;;Santiago ospitia jimenez - 2025465
-;; Talle 1 FLP
+;; Taller 1 FLP
 
 ;Punto 1
 
@@ -47,6 +47,32 @@
 (down '(1 2 3)) ; ---> '((1) (2) (3))
 (down '((una) (buena) (idea))) ; ---> '(((una)) ((buena)) ((idea)))
 (down '(un (objeto (mas)) complicado)) ;---> '((un) ((objeto (mas))) (complicado))
+
+
+; punto 4
+
+;;filter-in:
+;;Propósito:
+;;F x L -> L: procedimiento que recibe un predicado 'pred' y una lista 'lst'
+;;y retorna otra lista que contiene los elementos de 'lst' que cumplen con el predicado.
+;;<lista> := ()
+;;        := (<valor-de-scheme> <lista>)
+
+(define filter-in
+  (lambda (pred lst)
+     (if (null? lst)
+         '()
+         (if(pred (car lst))
+             (cons (car lst) (filter-in pred (cdr lst)))
+                 (filter-in pred (cdr lst))
+                 )
+         )   
+    )
+ )
+;;pruebas
+(filter-in number? '(a 2 (1 3) b 7))
+(filter-in symbol? '(a (b c) 17 foo))
+(filter-in string? '(a b u "univalle" "racket" "flp" 28 90 (1 2 3)))
 
 ;Punto 5
 
@@ -157,6 +183,53 @@
 ;; Pruebas
 (cartesian-product '(a b c) '(x y)) ; ---> '((a x) (a y) (b x) (b y) (c x) (c y))
 (cartesian-product '(p q r) '(5 6 7)); --> '((p 5) (p 6) (p 7) (q 5) (q 6) (q 7) (r 5) (r 6) (r 7))
+
+
+;punto 9
+
+;;sumaInversions:
+;;Propósito:
+;;int x L -> int: Procedimiento que recibe un número 'n' y una lista de números 'lst' y determina
+;;las veces en las que 'n' es mayor a los números que se encuentran en la lista.
+;;<lista> := ()
+;;        := (<number> <lista>)
+
+(define sumaInversions
+  (lambda (n lst)
+    (if(null? lst)
+       0
+       (if(> n (car lst))
+          (+ 1 (sumaInversions n (cdr lst)))
+          (sumaInversions n (cdr lst))
+          )
+       )   
+    )
+  )
+;;pruebas
+(sumaInversions 12 '(11 10 13))
+(sumaInversions 1 '(2 3 4))
+
+;;inversions:
+;;Propósito:
+;;L -> int: recibe una lista de números y determina el número de inversiones cuando i < j (posición)
+;;y ai > aj (dato en la posición)
+;;<lista> := ()
+;;        := (<number> <lista>)
+
+(define inversions
+  (lambda (lst)
+    (if(null? lst)
+       0
+       (+ (inversions (cdr lst)) (sumaInversions (car lst) (cdr lst)))
+       )
+    )
+
+  )
+;;pruebas
+(inversions '(2 3 8 6 1))
+(inversions '(1 2 3 4))
+(inversions '(3 2 1))
+
 
 ;Punto 10
 
@@ -270,6 +343,33 @@
 (filter-acum 1 10 + 0 odd?) ;--> 25 
 (filter-acum 1 10 + 0 even?) ;---> 30 
   
+  
+;punto 14
+
+;;path:
+;;Propósito:
+;;Int x binTree -> L: Procedimiento que recibe un número 'n' y un Árbol Binario de Búsqueda 'tree' y
+;;retorna una lista que contiene el camino del árbol en donde se encuentra el 'n' recibido. Si
+;;el número es encontrado en el nodo raíz, retorna una lista vacía.
+;;<arbol-binario> := (arbol-vacıo) empty
+;;                := (nodo) número <arbol-binario> <arbol-binario>
+
+(define path
+  (lambda (n tree)
+    (if(or (null? tree) (= n (car tree)))
+       '()
+       (if(< n (car tree))
+          (cons 'left (path n (cadr tree)))
+          (cons 'right (path n (cadr (cdr tree))))
+          ))
+    )
+  )
+;;pruebas
+(path 17 '(14 (7 () (12 () ()))(26 (20 (17 () ())())(31 () ()))))
+(path 13 '(8 (3 (1 () ()) (6 (4 () ()) (7 () ()))) (10 () (14 (13 () ()) ()))))  
+  
+
+
 ;Punto 15
 
 ;; count-even :
